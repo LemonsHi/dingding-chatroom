@@ -5,7 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_925928_qeg6em4lxa.css">
     <title>dingding-chatroom</title>
+    <style media="screen">
+      * {
+        box-sizing: border-box;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      html, body {
+        overflow: hidden;
+      }
+
+      @font-face {
+        font-family: 'iconfont';  /* project id 925928 */
+        src: url('//at.alicdn.com/t/font_925928_qeg6em4lxa.eot');
+        src: url('//at.alicdn.com/t/font_925928_qeg6em4lxa.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_925928_qeg6em4lxa.woff') format('woff'),
+        url('//at.alicdn.com/t/font_925928_qeg6em4lxa.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_925928_qeg6em4lxa.svg#iconfont') format('svg');
+      }
+    </style>
   </head>
   <body>
     <noscript>
@@ -13,5 +34,9 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      window.socket = io();
+    </script>
   </body>
 </html>
