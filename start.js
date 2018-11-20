@@ -17,29 +17,26 @@ let userInfo = []
 let index = 0
 
 io.on('connection', function(socket){
-  // console.log('a user connection:', socket.id);
+  // 用户信息列表
   userInfo.push({
     key: index++,
     id: socket.id,
     name: socket.id
   })
-  io.emit('login', socket.id);
-  // console.log(JSON.stringify(userInfo));
-  io.emit('user list', JSON.stringify(userInfo))
 
+  // 用户连接，代表登入，将唯一标识符 socket id 发给用户用来
+  // 目前存在的问题：唯一标识符 id 存在问题，不能以 socket.id 作为唯一标识符 - 需要优化
+  socket.emit('login', socket.id);
+
+  // 每当一个用户连接服务，触发 user list 事件，告知所有用户 - 目前有多少用户连接这个服务器
+  io.emit('user list', JSON.stringify(userInfo));
+
+  // 用户断开连接时，触发事件
   socket.on('disconnect', function(reason){
-    console.log(socket.id);
-    // 修改
-    // let k;
-    // for (var i = 0, lenght = userInfo.length; i < lenght; i++) {
-    //   if (userInfo[i].id === socket.id) {
-    //     k = i;
-    //     break;
-    //   }
-    // }
-    // userInfo.slice(k, 1);
-    console.log(JSON.stringify(userInfo));
-    console.log(userInfo.length);
+    userInfo = userInfo.filter((user) => {
+      return user.id !== socket.id;
+    })
+    io.emit('user list', JSON.stringify(userInfo));
   });
 
   socket.on('chat message', function(msg){
@@ -47,10 +44,6 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
   });
 });
-
-// io.on('disconnect', function (socket) {
-//   console.log('\n a user connection:', socket.id);
-// })
 
 http.listen(port, function(){
   console.log('listening on *:' + port);

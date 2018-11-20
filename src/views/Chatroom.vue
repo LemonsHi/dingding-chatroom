@@ -9,23 +9,21 @@
       <el-col :span="5" style="height: 100%;">
         <UserList :user-list="userList"/>
       </el-col>
-      <el-col :span="19">
-        <div class="chat-room-main-panel">
-          <el-row>
-            <el-col :span="24">
-              <div class="chat-room-panel">
+      <el-col :span="19" style="height: 100%">
+        <el-row style="height: 65%">
+          <el-col :span="24">
+            <div class="chat-room-panel">
 
-              </div>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <div class="chat-room-send">
+            </div>
+          </el-col>
+        </el-row>
+        <el-row style="height: 35%;">
+          <el-col :span="24">
+            <div class="chat-room-send">
 
-              </div>
-            </el-col>
-          </el-row>
-        </div>
+            </div>
+          </el-col>
+        </el-row>
       </el-col>
     </el-row>
   </div>
@@ -53,7 +51,25 @@ export default {
   created () {
     this.initSocket()
     // this.$store.dispatch('setID', 'JVEOG6Pd9-dqNqDEAAAA')
-    // this.$store.dispatch('setUserList', JSON.parse('[{"key":"0","id":"1","name":"1"}]'))
+    // this.$store.dispatch('setUserList', JSON.parse(`
+    //   [
+    //     {
+    //       "key":"0",
+    //       "id":"JVEOG6Pd9-dqNqDEAAAA",
+    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
+    //     },
+    //     {
+    //       "key":"1",
+    //       "id":"JVEOG6Pd9-dqNqDEAAAA",
+    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
+    //     },
+    //     {
+    //       "key":"2",
+    //       "id":"JVEOG6Pd9-dqNqDEAAAA",
+    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
+    //     }
+    //   ]
+    // `))
   },
   methods: {
     // onSubmit () {

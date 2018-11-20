@@ -1,26 +1,25 @@
-# dingding-chatroom
+# 类钉钉聊天室（socket.io - vue - express）
 
-## Project setup
-```
-npm install
-```
+## 项目启动
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+安装需要的依赖
 
-### Compiles and minifies for production
-```
-npm run build
-```
+> npm install
 
-### Run your tests
-```
-npm run test
-```
+启动聊天服务器
 
-### Lints and fixes files
-```
-npm run lint
-```
+> node stat.js
+
+### 项目构建记录
+
+#### 2018-11-20
+
+**完成功能：**
+
+1. 多用户连接的展示用户列表。
+2. 用户退出或加入用户列表更新。
+
+**待解决问题：**
+
+1. 不能用 `socket.id` 作为用户唯一标识 - 需要寻找一个方法解决 *用户的唯一标识* 问题。
+2. 交互优化 - 添加 *动画效果* 问题。

@@ -36,7 +36,15 @@ export default {
   }
   .info {
     height: 80px;
-    line-height: 80px;
+    line-height: 50px;
+    white-space: nowrap;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+    padding: 15px;
+    p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 </style>
