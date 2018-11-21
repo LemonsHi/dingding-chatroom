@@ -22,7 +22,8 @@ export default {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #eee;
+  // background: #eee;
   padding: 10px;
+  border-right: 1px solid #D0D0D0;
 }
 </style>

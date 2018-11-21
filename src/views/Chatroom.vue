@@ -10,18 +10,14 @@
         <UserList :user-list="userList"/>
       </el-col>
       <el-col :span="19" style="height: 100%">
-        <el-row style="height: 65%">
-          <el-col :span="24">
-            <div class="chat-room-panel">
-
-            </div>
+        <el-row style="height: 90%">
+          <el-col :span="24" style="height: 100%;">
+            <ChatPanel />
           </el-col>
         </el-row>
-        <el-row style="height: 35%;">
-          <el-col :span="24">
-            <div class="chat-room-send">
-
-            </div>
+        <el-row style="height: 10%;">
+          <el-col :span="24" style="height: 100%;">
+            <SendMessage />
           </el-col>
         </el-row>
       </el-col>
@@ -31,6 +27,8 @@
 <script>
 import ChatRoomTitle from '../components/ChatRoomTitle'
 import UserList from '../components/UserList'
+import SendMessage from '../components/SendMessage'
+import ChatPanel from '../components/ChatPanel'
 
 export default {
   name: "Chatroom",
@@ -41,7 +39,9 @@ export default {
   }),
   components: {
     ChatRoomTitle,
-    UserList
+    UserList,
+    SendMessage,
+    ChatPanel
   },
   computed: {
     userList () {
@@ -50,34 +50,28 @@ export default {
   },
   created () {
     this.initSocket()
-    // this.$store.dispatch('setID', 'JVEOG6Pd9-dqNqDEAAAA')
-    // this.$store.dispatch('setUserList', JSON.parse(`
-    //   [
-    //     {
-    //       "key":"0",
-    //       "id":"JVEOG6Pd9-dqNqDEAAAA",
-    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
-    //     },
-    //     {
-    //       "key":"1",
-    //       "id":"JVEOG6Pd9-dqNqDEAAAA",
-    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
-    //     },
-    //     {
-    //       "key":"2",
-    //       "id":"JVEOG6Pd9-dqNqDEAAAA",
-    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
-    //     }
-    //   ]
-    // `))
+    this.$store.dispatch('setID', 'JVEOG6Pd9-dqNqDEAAAA')
+    this.$store.dispatch('setUserList', JSON.parse(`
+      [
+        {
+          "key":"0",
+          "id":"JVEOG6Pd9-dqNqDEAAAA",
+          "name":"JVEOG6Pd9-dqNqDEAAAA"
+        },
+        {
+          "key":"1",
+          "id":"JVEOG6Pd9-dqNqDEAAAA",
+          "name":"JVEOG6Pd9-dqNqDEAAAA"
+        },
+        {
+          "key":"2",
+          "id":"JVEOG6Pd9-dqNqDEAAAA",
+          "name":"JVEOG6Pd9-dqNqDEAAAA"
+        }
+      ]
+    `))
   },
   methods: {
-    // onSubmit () {
-    //   if (window.socket) {
-    //     window.socket.emit('chat message', this.form.input)
-    //     this.form.input = ''
-    //   }
-    // },
     initSocket () {
       // setTimeout(() => {
       //   this.$store.dispatch('setUserList', JSON.parse('[{"key":"0","id":"1","name":"1"}, {"key":"1","id":"2","name":"2"}]'))
@@ -107,9 +101,5 @@ export default {
   position: absolute;
   height: 100%;
   width: 100%;
-  .chat-room-user-list {
-    height: 100%;
-    background: #eee;
-  }
 }
 </style>

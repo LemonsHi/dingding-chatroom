@@ -21,7 +21,9 @@ io.on('connection', function(socket){
   userInfo.push({
     key: index++,
     id: socket.id,
-    name: socket.id
+    name: 'name',
+    info: 'Personal status',
+    state: 1
   })
 
   // 用户连接，代表登入，将唯一标识符 socket id 发给用户用来
@@ -41,7 +43,11 @@ io.on('connection', function(socket){
 
   socket.on('chat message', function(msg){
     console.log(msg);
-    io.emit('chat message', msg);
+
+    io.emit('chat message', JSON.stringify({
+      id: socket.id,
+      content: msg
+    }));
   });
 });
 

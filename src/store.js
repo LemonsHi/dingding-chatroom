@@ -27,6 +27,9 @@ export default new Vuex.Store({
   getters: {
     allUserList: state => {
       return state.userList
+    },
+    selfId: state => {
+      return state.id
     }
   }
 });
