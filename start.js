@@ -14,14 +14,17 @@ app.get('/js/*.js', function(req, res){
 });
 
 let userInfo = []
+let msgDataBase = []
 let index = 0
+let msgID = 0
+let _name = 0
 
 io.on('connection', function(socket){
   // 用户信息列表
   userInfo.push({
     key: index++,
     id: socket.id,
-    name: 'name',
+    name: `第 ${_name++} 号用户`,
     info: 'Personal status',
     state: 1
   })
@@ -44,11 +47,47 @@ io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     console.log(msg);
 
-    io.emit('chat message', JSON.stringify({
+    let needReadID = [];
+    userInfo.forEach((user, index) => {
+      needReadID.push(user.id);
+    })
+
+    let msgStr = {
+      msgID: msgID++,
       id: socket.id,
       content: msg
-    }));
+    }
+
+    let msgInfo = {
+      msgID: msgStr.msgID,
+      id: socket.id,
+      needReadID: needReadID,
+      readed: []
+    }
+
+    msgDataBase.push(msgInfo)
+
+    // 消息状态信息发送
+    io.emit('msgState', JSON.stringify(msgDataBase));
+    io.emit('chat message', JSON.stringify(msgStr));
   });
+
+  socket.on('msgReaded', function (state) {
+    console.log(`${socket.id} is: ${state}`);
+    if (state && msgDataBase.length !== 0) {
+      msgDataBase.forEach((msgInfo) => {
+        // msgInfo.readed.push(socket.id)
+        if (msgInfo.id !== socket.id) {
+          msgInfo.needReadID = msgInfo.needReadID.filter((read) => {
+            return read !== socket.id
+          })
+        }
+        console.log(msgInfo.needReadID);
+      })
+      // 消息状态信息发送
+      io.emit('msgState', JSON.stringify(msgDataBase));
+    }
+  })
 });
 
 http.listen(port, function(){

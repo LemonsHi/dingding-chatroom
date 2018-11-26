@@ -46,30 +46,33 @@ export default {
   computed: {
     userList () {
       return this.$store.getters.allUserList
+    },
+    userID () {
+      return this.$store.getters.selfId
     }
   },
   created () {
     this.initSocket()
-    this.$store.dispatch('setID', 'JVEOG6Pd9-dqNqDEAAAA')
-    this.$store.dispatch('setUserList', JSON.parse(`
-      [
-        {
-          "key":"0",
-          "id":"JVEOG6Pd9-dqNqDEAAAA",
-          "name":"JVEOG6Pd9-dqNqDEAAAA"
-        },
-        {
-          "key":"1",
-          "id":"JVEOG6Pd9-dqNqDEAAAA",
-          "name":"JVEOG6Pd9-dqNqDEAAAA"
-        },
-        {
-          "key":"2",
-          "id":"JVEOG6Pd9-dqNqDEAAAA",
-          "name":"JVEOG6Pd9-dqNqDEAAAA"
-        }
-      ]
-    `))
+    // this.$store.dispatch('setID', 'JVEOG6Pd9-dqNqDEAAAA')
+    // this.$store.dispatch('setUserList', JSON.parse(`
+    //   [
+    //     {
+    //       "key":"0",
+    //       "id":"JVEOG6Pd9-dqNqDEAAAA",
+    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
+    //     },
+    //     {
+    //       "key":"1",
+    //       "id":"JVEOG6Pd9-dqNqDEAAAA",
+    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
+    //     },
+    //     {
+    //       "key":"2",
+    //       "id":"JVEOG6Pd9-dqNqDEAAAA",
+    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
+    //     }
+    //   ]
+    // `))
   },
   methods: {
     initSocket () {
@@ -92,6 +95,13 @@ export default {
           this.$store.dispatch('setUserList', JSON.parse(msg))
         })
       }
+      document.addEventListener("visibilitychange", function () {
+        console.log( document.visibilityState );
+        if (window.socket) {
+          let state = document.visibilityState === 'hidden' ? false : true
+          window.socket.emit('msgReaded', state)
+        }
+      });
     }
   }
 }
