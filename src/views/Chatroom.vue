@@ -13,6 +13,7 @@
         <el-row style="height: 90%">
           <el-col :span="24" style="height: 100%;">
             <ChatPanel />
+            <InUserList />
           </el-col>
         </el-row>
         <el-row style="height: 10%;">
@@ -29,6 +30,7 @@ import ChatRoomTitle from '../components/ChatRoomTitle'
 import UserList from '../components/UserList'
 import SendMessage from '../components/SendMessage'
 import ChatPanel from '../components/ChatPanel'
+import InUserList from '../components/InUserList'
 
 export default {
   name: "Chatroom",
@@ -41,7 +43,8 @@ export default {
     ChatRoomTitle,
     UserList,
     SendMessage,
-    ChatPanel
+    ChatPanel,
+    InUserList
   },
   computed: {
     userList () {
@@ -64,12 +67,12 @@ export default {
     //     {
     //       "key":"1",
     //       "id":"JVEOG6Pd9-dqNqDEAAAA",
-    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
+    //       "name":"123"
     //     },
     //     {
     //       "key":"2",
     //       "id":"JVEOG6Pd9-dqNqDEAAAA",
-    //       "name":"JVEOG6Pd9-dqNqDEAAAA"
+    //       "name":"qwe"
     //     }
     //   ]
     // `))

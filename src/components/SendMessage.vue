@@ -2,8 +2,8 @@
   <div class="chat-room-send">
     <el-row type="flex" align="middle" style="height: 100%;">
       <el-col :span="20" style="border-right: 1px solid #d0d0d0;">
-        <el-form ref="form" :model="form">
-          <el-input v-model="form.msg" placeholder="Type your message" style="width: 90%;" @keyup.enter.native="onSubmit"></el-input>
+        <el-form ref="form">
+          <el-input v-model="formMsg" placeholder="Type your message" style="width: 90%;" @keyup.enter.native="onSubmit"></el-input>
           <el-button circle class="iconfont buttom-send" @click="onSubmit">&#xe608;</el-button>
         </el-form>
       </el-col>
@@ -28,6 +28,21 @@ export default {
       msg: ''
     }
   }),
+  computed: {
+    formMsg: {
+      get: function () {
+        return this.form.msg
+      },
+      set: function (nVal) {
+        this.form.msg = nVal
+        let reg = /@.*/g;
+        if (reg.test(nVal)) {
+          this.$store.dispatch('controlList', true)
+          this.$store.dispatch('search', nVal.split('@')[1])
+        }
+      }
+    }
+  },
   methods: {
     onSubmit (event) {
       event.preventDefault()
