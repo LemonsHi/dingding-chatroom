@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-room">
+  <div class="chat-room" @click="close">
     <el-row style="height: 8%;">
       <el-col :span="24" style="height: 100%;">
         <ChatRoomTitle />
@@ -105,6 +105,9 @@ export default {
           window.socket.emit('msgReaded', state)
         }
       });
+    },
+    close () {
+      this.$store.dispatch('controlList', false)
     }
   }
 }

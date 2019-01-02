@@ -6,9 +6,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     id: '',
-    userList:[],
+    userList: [],
     openUserList: false,
-    searchName: ''
+    searchName: '',
+    msg: '',
+    DName: []
   },
   mutations: {
     setID (state, id) {
@@ -22,6 +24,12 @@ export default new Vuex.Store({
     },
     search (state, name) {
       state.searchName = name
+    },
+    msg (state, msg) {
+      state.msg = msg
+    },
+    addMsg (state, msg) {
+      state.msg += msg
     }
   },
   actions: {
@@ -36,6 +44,12 @@ export default new Vuex.Store({
     },
     search (context, name) {
       context.commit('search', name)
+    },
+    msg (context, msg) {
+      context.commit('msg', msg)
+    },
+    addMsg (context, msg) {
+      context.commit('addMsg', msg)
     }
   },
   getters: {
@@ -52,6 +66,9 @@ export default new Vuex.Store({
     },
     isOpenUserList: state => {
       return state.openUserList
+    },
+    getMsg: state => {
+      return state.msg
     }
   }
 });
